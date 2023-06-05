@@ -63,10 +63,11 @@ ps aux | grep "PollActivityOperation"
 To run the application, you need to use the following instructions
 1. Setup postgres server using the configuration mentioned in **./resources/dev/database.yml** file
 2. Create table using the schema mentioned in **./resources/schema/1.sql**
-3. Run **go build -o main** command to build the service 
-4. Run **./main --port 8080 --env dev --base-config-path ./resources** command to start the service 
-5. Note: the configurations are present in the env directory inside the base config path directory
-6. Note: logs will be printed in the mentioned log path as per the config provided. Log rotation is also handled.
+3. Run **go mod tidy** and **go mod vendor** from the project's root directory to load all dependencies
+4. Run **go build -o main** command to build the service 
+5. Run **./main --port 8080 --env dev --base-config-path ./resources** command to start the service 
+6. Note: the configurations are present in the env directory inside the base config path directory
+7. Note: logs will be printed in the mentioned log path as per the config provided. Log rotation is also handled.
 
 
 ## How to run the application via docker on local?
