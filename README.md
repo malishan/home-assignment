@@ -55,10 +55,7 @@ To run the application, you need to use the following instructions
 ## How to run the application via docker on local?
 
 To run the application, you need to use the following instructions
-1. Run **go build -o main** command to build the service 
-2. Run **./main --port 8080 --env dev --base-config-path ./resources** command to start the service 
-3. Note: the configurations are present in the env directory inside the base config path directory
-4. Note: logs will be printed in the mentioned log path as per the config provided. Log rotation is also handled.
+1. Facing problem staring the postgres dependency container
 
 
 
