@@ -1,0 +1,15 @@
+apiTimeout: 2
+boredApiActivityCount: 3
+httpApiRateLimitCount: 10
+httpApiRateLimitInSecond: 1
+
+http:
+  connectTimeoutInMillis: 3000
+  keepAliveDurationInMillis: 30000
+  maxIdleConnections: 10
+  idleConnectionTimeoutInMillis: 90000
+  tlsHandshakeTimeoutInMillis: 10000
+  expectContinueTimeoutInMillis: 1000
+  timeoutInMillis: 2000
+
+pollActivityCronTiming: '*/15 * * * *'

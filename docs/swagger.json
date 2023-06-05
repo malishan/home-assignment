@@ -1,0 +1,220 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "## ## An assignment.\n\nX-User-Id \t\t\te.g. =\u003e 'X-User-Id':'1234'\nX-Request-Id \t\te.g. =\u003e 'X-Request-Id':'0bc86576911d7468f7bbd7d55fb2b72d'",
+        "title": "Home Assignment",
+        "termsOfService": "https://swagger.io/terms/",
+        "contact": {
+            "name": "MD ALISHAN",
+            "email": "ahmed.alishan3@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/health/v1/status": {
+            "get": {
+                "description": "Health status of resources like database, etc.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Provides resource health status.",
+                "operationId": "healthStatus",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "X-User-Id Header",
+                        "name": "X-User-Id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "X-Request-Id Header",
+                        "name": "X-Request-Id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "X-Location Header",
+                        "name": "X-Location",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/model.APISuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.HealthApiResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/model.APIFailureResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model.APIFailureResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/home/v1/activities": {
+            "get": {
+                "description": "It fetches the response from boredapi.com and returns three unique keys with their activity value",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Get Activities Api returns 3 distinct activity values.",
+                "operationId": "getActivities",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "X-User-Id Header",
+                        "name": "X-User-Id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "X-Request-Id Header",
+                        "name": "X-Request-Id",
+                        "in": "header"
+                    },
+                    {
+                        "type": "string",
+                        "description": "X-Location Header",
+                        "name": "X-Location",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/model.APISuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.BoredApiResponse"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/model.APIFailureResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/model.APIFailureResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "model.APIFailureResponse": {
+            "type": "object",
+            "properties": {
+                "errorcode": {
+                    "type": "string",
+                    "example": "CE10001"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "INTERNAL SERVER ERROR"
+                },
+                "status": {
+                    "type": "boolean",
+                    "enum": [
+                        true,
+                        false
+                    ],
+                    "example": false
+                }
+            }
+        },
+        "model.APISuccessResponse": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "status": {
+                    "type": "boolean",
+                    "enum": [
+                        true,
+                        false
+                    ],
+                    "example": false
+                }
+            }
+        },
+        "model.BoredApiResponse": {
+            "type": "object",
+            "properties": {
+                "activity": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.HealthApiResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

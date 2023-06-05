@@ -1,0 +1,143 @@
+basePath: /
+definitions:
+  model.APIFailureResponse:
+    properties:
+      errorcode:
+        example: CE10001
+        type: string
+      message:
+        example: INTERNAL SERVER ERROR
+        type: string
+      status:
+        enum:
+        - true
+        - false
+        example: false
+        type: boolean
+    type: object
+  model.APISuccessResponse:
+    properties:
+      data: {}
+      status:
+        enum:
+        - true
+        - false
+        example: false
+        type: boolean
+    type: object
+  model.BoredApiResponse:
+    properties:
+      activity:
+        type: string
+      key:
+        type: string
+    type: object
+  model.HealthApiResponse:
+    properties:
+      message:
+        type: string
+      resource:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact:
+    email: ahmed.alishan3@gmail.com
+    name: MD ALISHAN
+  description: "## ## An assignment.\n\nX-User-Id \t\t\te.g. => 'X-User-Id':'1234'\nX-Request-Id
+    \t\te.g. => 'X-Request-Id':'0bc86576911d7468f7bbd7d55fb2b72d'"
+  termsOfService: https://swagger.io/terms/
+  title: Home Assignment
+  version: "1.0"
+paths:
+  /health/v1/status:
+    get:
+      consumes:
+      - application/json
+      description: Health status of resources like database, etc.
+      operationId: healthStatus
+      parameters:
+      - description: X-User-Id Header
+        in: header
+        name: X-User-Id
+        type: string
+      - description: X-Request-Id Header
+        in: header
+        name: X-Request-Id
+        type: string
+      - description: X-Location Header
+        in: header
+        name: X-Location
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/model.APISuccessResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.HealthApiResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.APIFailureResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.APIFailureResponse'
+      summary: Provides resource health status.
+      tags:
+      - Home
+  /home/v1/activities:
+    get:
+      consumes:
+      - application/json
+      description: It fetches the response from boredapi.com and returns three unique
+        keys with their activity value
+      operationId: getActivities
+      parameters:
+      - description: X-User-Id Header
+        in: header
+        name: X-User-Id
+        type: string
+      - description: X-Request-Id Header
+        in: header
+        name: X-Request-Id
+        type: string
+      - description: X-Location Header
+        in: header
+        name: X-Location
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/model.APISuccessResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/model.BoredApiResponse'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/model.APIFailureResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/model.APIFailureResponse'
+      summary: Get Activities Api returns 3 distinct activity values.
+      tags:
+      - Home
+swagger: "2.0"
