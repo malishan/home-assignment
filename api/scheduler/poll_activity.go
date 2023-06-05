@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"log"
 	"runtime/debug"
 
 	"github.com/google/uuid"
@@ -28,6 +29,8 @@ func PollActivityOperation() {
 	}
 
 	responseBytes, _ := json.Marshal(&response)
+
+	log.Printf("\n\nresponse: %+v\n", string(responseBytes))
 
 	logger.FileLogger.CtxInfo(ctx).Str(constants.ResponseBodyLogParams, string(responseBytes)).Msg("PollActivityOperation: success result")
 }

@@ -1,7 +1,9 @@
 # Assignment Service
 Assignment service provides REST apis for fetch response from a dependent api.
 
+* Check application swagger via the below link after starting application on localhost:8080
 - [Swagger](http://127.0.0.1:8080/swagger/index.html#/)
+* Api can be hit directly from the browser via swagger. Click on **Try it out** for each api mentioned in the swagger
 
 ## Functional Requirement
 ### Health Api
@@ -9,7 +11,7 @@ Assignment service provides REST apis for fetch response from a dependent api.
 ### Assignment Api
 * **Bored Api Response**: return 3 pairs of distinct key and assignment values
 ### Scheduler
-* **Log Distinct Keya**: every 15 mins periodically print all distinct keys returned from boredapi
+* **Log Distinct Keys**: every 15 mins periodically print all distinct keys returned from boredapi
 
 ## Health Api
 * api returns the status of database
@@ -29,7 +31,8 @@ curl --location 'http://localhost:8080/home/v1/activities'
 ## Scheduler Logs
 * every 15 mins scheduler picks all distinct keys returned from boredapi.com and was saved in db
 * logs are printed in file
-* use the following log format to get those logs
+* use the following log format to get those logs from file
+* console logs can also be found
 ```shell
 ps aux | grep "PollActivityOperation"
 ```
@@ -41,15 +44,21 @@ ps aux | grep "PollActivityOperation"
 
 ## Checks and Limitations
 * gracefull shutdown of resources are handled
+* there is rate limit check on the number of times boredapi.com can be called which is 10tps. Its configurable via the app configuration file
+* the number of activity count to be returned via '/home/v1/activities' api can also be configured but it most be noted that the api timeout should also be increased
+* application logs are found in Logs directory which is configured via app config
+* db schema can be found inside './resources' directory
 
 
 ## How to run the application directly on local?
 
 To run the application, you need to use the following instructions
-1. Run **go build -o main** command to build the service 
-2. Run **./main --port 8080 --env dev --base-config-path ./resources** command to start the service 
-3. Note: the configurations are present in the env directory inside the base config path directory
-4. Note: logs will be printed in the mentioned log path as per the config provided. Log rotation is also handled.
+1. Setup postgres server using the configuration mentioned in **./resources/dev/database.yml** file
+2. Create table using the schema mentioned in **./resources/schema/1.sql**
+3. Run **go build -o main** command to build the service 
+4. Run **./main --port 8080 --env dev --base-config-path ./resources** command to start the service 
+5. Note: the configurations are present in the env directory inside the base config path directory
+6. Note: logs will be printed in the mentioned log path as per the config provided. Log rotation is also handled.
 
 
 ## How to run the application via docker on local?
