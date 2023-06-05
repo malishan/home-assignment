@@ -13,6 +13,14 @@ Assignment service provides REST apis for fetch response from a dependent api.
 ### Scheduler
 * **Log Distinct Keys**: every 15 mins periodically print all distinct keys returned from boredapi
 
+## Try Out With Swagger
+* all rest apis can be hit with swagger
+* run the application via steps provided below
+* if the application is running on localhost:8080, then open the following swagger url in browser to test out apis
+```shell
+http://127.0.0.1:8080/swagger/index.html#/
+```
+
 ## Health Api
 * api returns the status of database
 * use the following curl to hit health api
